@@ -1,0 +1,138 @@
+.wrap {
+  position: relative;
+}
+
+/* The hero particle background it controls is itself disabled below this
+   width (see HeroCanvasBackground) — no point offering a color control for
+   an effect that isn't rendering. */
+@media (max-width: 768px) {
+  .wrap {
+    display: none;
+  }
+}
+
+/* Same reasoning — the particle background is also skipped entirely under
+   reduced motion (see HeroCanvasBackground), so there's nothing for this
+   control to affect there either. */
+@media (prefers-reduced-motion: reduce) {
+  .wrap {
+    display: none;
+  }
+}
+
+.popover {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  min-width: 210px;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-3);
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  animation: enter-down 0.2s var(--ease-standard) both;
+}
+
+@keyframes enter-down {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.swatchRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.swatch {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  padding: 0;
+  cursor: pointer;
+  border: 2px solid transparent;
+  box-shadow: 0 0 0 1px var(--border);
+  transition: transform var(--ease-standard), box-shadow var(--ease-standard);
+}
+
+.swatch:hover {
+  transform: scale(1.12);
+}
+
+.swatch:active {
+  transform: scale(0.95);
+}
+
+.swatchActive {
+  box-shadow: 0 0 0 2px var(--card-bg), 0 0 0 4px var(--text-primary);
+}
+
+.customRow {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding-top: var(--space-1);
+  border-top: 1px solid var(--border);
+}
+
+.colorInput {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  background: none;
+}
+
+/* Native color-swatch chrome varies a lot per browser — strip it down to a
+   plain, borderless square so it matches the rest of this popover. */
+.colorInput::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+.colorInput::-webkit-color-swatch {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+.colorInput::-moz-color-swatch {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.customLabel {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.resetBtn {
+  align-self: flex-start;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--accent-text);
+  cursor: pointer;
+}
+
+.resetBtn:hover {
+  text-decoration: underline;
+}

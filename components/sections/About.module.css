@@ -1,0 +1,105 @@
+.about {
+  padding: var(--space-6) var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inner {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+.panel {
+  position: sticky;
+  top: 100px;
+  order: 1;
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.focusItem {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+
+.focusIcon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background-color: var(--accent-soft);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.focusTitle {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  margin-bottom: 0.15rem;
+}
+
+.focusDescription {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.content {
+  order: 2;
+  text-align: left;
+}
+
+.paragraph {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: var(--space-3);
+}
+
+.paragraph:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .about {
+    padding: var(--space-5) var(--space-2);
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  .panel {
+    position: static;
+    order: 1;
+  }
+
+  .content {
+    order: 2;
+    text-align: center;
+  }
+}
+
+/* Reserves room for the fixed side-nav dots — see --sidenav-gutter in
+   globals.css. Declared after the base rule so it wins for this side only. */
+@media (min-width: 769px) {
+  .about {
+    padding-right: var(--sidenav-gutter);
+  }
+}

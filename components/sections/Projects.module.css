@@ -1,0 +1,186 @@
+.projects {
+  padding: var(--space-6) var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inner {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-4);
+}
+
+.projectCard {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+}
+
+/* Entrance is a one-shot `animation` triggered by the ancestor reveal
+   state, deliberately kept separate from the hover `transition` (inherited
+   from .card: transform/box-shadow/border-color). If the stagger delay
+   below lived on a shared `transition-delay` instead, every hover after
+   the entrance would inherit that same delay and feel laggy — animation
+   and transition are independent, so hover stays instant regardless of
+   how far down the grid a card sits.
+
+   Uses a locally-declared keyframe (rather than referencing globals.css's
+   `enter-up`) because this project's CSS-module pipeline scopes bare
+   animation-name references per file — a cross-file reference here
+   silently resolves to nothing and the card never animates past
+   opacity:0. Same reason Skills/Hero/HeaderBar/SideNav each declare their
+   own local keyframe instead of sharing one. */
+:global(.reveal.is-visible) .projectCard {
+  animation: project-in var(--duration-entrance) var(--ease-premium) both;
+}
+
+@keyframes project-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.projectCard:nth-child(2) {
+  animation-delay: var(--stagger-step);
+}
+
+.projectCard:nth-child(3) {
+  animation-delay: calc(var(--stagger-step) * 2);
+}
+
+.projectCard:nth-child(4) {
+  animation-delay: calc(var(--stagger-step) * 3);
+}
+
+.projectCard:nth-child(5) {
+  animation-delay: calc(var(--stagger-step) * 4);
+}
+
+.projectCard:nth-child(n + 6) {
+  animation-delay: calc(var(--stagger-step) * 5);
+}
+
+.projectCard:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--accent);
+}
+
+.media {
+  position: relative;
+  height: 190px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--accent-soft), var(--bg-secondary));
+  overflow: hidden;
+}
+
+.mediaGlow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 20%, rgb(59 130 246 / 0.2), transparent 60%);
+  pointer-events: none;
+}
+
+.iconBadge {
+  position: relative;
+  z-index: 1;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--ease-standard);
+}
+
+.projectCard:hover .iconBadge {
+  transform: scale(1.08) rotate(-4deg);
+}
+
+.body {
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.3;
+  margin-top: 0.4rem;
+  margin-bottom: 0.6rem;
+}
+
+.description {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  font-size: 0.97rem;
+  margin-bottom: var(--space-3);
+  flex: 1;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.footerCta {
+  margin-top: var(--space-5);
+  text-align: center;
+}
+
+.footerCtaText {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: var(--space-2);
+}
+
+@media (max-width: 768px) {
+  .projects {
+    padding: var(--space-5) var(--space-2);
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+
+  .media {
+    height: 170px;
+  }
+
+  .body {
+    padding: var(--space-3);
+  }
+}
+
+/* Reserves room for the fixed side-nav dots — see --sidenav-gutter in
+   globals.css. Declared after the base rule so it wins for this side only. */
+@media (min-width: 769px) {
+  .projects {
+    padding-right: var(--sidenav-gutter);
+  }
+}

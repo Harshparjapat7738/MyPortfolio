@@ -1,0 +1,303 @@
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8rem var(--space-4) var(--space-6);
+  overflow: hidden;
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: var(--space-6);
+  align-items: center;
+}
+
+.content {
+  text-align: left;
+}
+
+.greeting {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-2);
+}
+
+.name {
+  font-size: clamp(2.25rem, 5vw, 4rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: var(--space-2);
+  color: var(--text-primary);
+}
+
+.role {
+  display: flex;
+  align-items: center;
+  min-height: 2.5rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: var(--space-3);
+  text-shadow: 0 0 20px rgb(59 130 246 / 0.35);
+}
+
+.techBadges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: var(--space-4);
+}
+
+/* Hero-only pill treatment — a glowing, fully-rounded variant of the
+   site's shared .tag-chip, scoped here rather than changing that shared
+   class (which Experience/Projects also use and shouldn't pick this up). */
+.pill {
+  display: inline-flex;
+  background-color: var(--card-bg);
+  color: var(--text-secondary);
+  padding: 0.4rem 1rem;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid var(--accent);
+  box-shadow: 0 0 12px var(--accent-soft);
+  white-space: nowrap;
+}
+
+.description {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  max-width: 34rem;
+  margin-bottom: var(--space-4);
+}
+
+.actions {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.portrait {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.portraitEnter {
+  animation: portrait-in 0.7s var(--ease-premium) 0.2s both;
+}
+
+@keyframes portrait-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Extra ring of room around .frame for the orbit nodes to float in. It
+   self-scales with .frame at any width (both are percentage-of-container
+   sized), so nothing here depends on a fixed pixel budget — only the
+   nodes themselves are gated to wide viewports below, via .nodes. */
+.orbit {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.frame {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  aspect-ratio: 1 / 1;
+}
+
+.glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(59 130 246 / 0.55) 0%, rgb(59 130 246 / 0.25) 42%, transparent 72%);
+  filter: blur(46px);
+  z-index: 0;
+}
+
+.avatar {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 4px solid var(--accent);
+  box-shadow: var(--shadow-glow);
+  background: linear-gradient(155deg, var(--card-bg), var(--bg-secondary));
+}
+
+.avatarImage {
+  object-fit: cover;
+}
+
+.avatarInitials {
+  font-size: clamp(3rem, 8vw, 4.5rem);
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+}
+
+/* Orbit nodes: a decorative echo of the tech badges, slowly traveling in
+   a ring around the photo. Hidden below 1280px — .orbit only gets real
+   spare room (beyond .frame's own size) once the portrait column is wide
+   enough that a node can sit outside the circle without either
+   overflowing the page or colliding with the text column. Below that,
+   .frame and .orbit shrink together 1:1 and the row of .pill badges
+   above already carries the same information as real, readable text.
+
+   Each pill rides a circular CSS motion path (offset-path) with
+   offset-rotate pinned to 0deg, so it keeps its own fixed, upright
+   orientation for the whole lap — the path moves it, nothing rotates
+   it. That's what earlier used two separate animations (the ring
+   spinning one way, each label counter-spinning the other) to fake, but
+   two independently-timed animations can drift out of phase — most
+   visibly right after the section is hidden/shown (e.g. .nodes toggling
+   display at the 1280px boundary on resize), leaving pills mid-tilt.
+   A single animation per node with no rotation involved can't desync.
+
+   --orbit-radius and --orbit-scale (on .nodes) and --orbit-delay (per
+   .node) are set by useOrbitLayout once it's measured the actual pills,
+   sized to fit however many there are without overlapping — the 46%/1
+   defaults here only cover the brief moment before that first
+   measurement lands (see the hook for why that moment is never actually
+   painted to the screen). */
+.nodes {
+  display: none;
+}
+
+.node {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  margin: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: max-content;
+  height: max-content;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  padding: 0.45rem 1.1rem;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid var(--accent);
+  box-shadow: 0 0 16px var(--accent-soft);
+  white-space: nowrap;
+  offset-path: circle(var(--orbit-radius, 46%) at 50% 50%);
+  offset-anchor: 50% 50%;
+  offset-rotate: 0deg;
+  offset-distance: 0%;
+  transform: scale(var(--orbit-scale, 1));
+  animation: orbit-travel 44s linear infinite;
+  animation-delay: var(--orbit-delay, 0s);
+}
+
+@keyframes orbit-travel {
+  from {
+    offset-distance: 0%;
+  }
+  to {
+    offset-distance: 100%;
+  }
+}
+
+@media (min-width: 1280px) {
+  .nodes {
+    display: block;
+    position: absolute;
+    inset: 0;
+  }
+}
+
+/* animation-play-state:paused looks like the obvious way to freeze each
+   node in place, but a negative animation-delay is only actually
+   consumed once an animation has *run* — pausing one that was paused
+   from the very start leaves every node stuck at the unshifted 0%
+   keyframe instead of its own delay-adjusted spot, collapsing them all
+   onto the same point. Turning the animation off entirely and setting
+   the static position directly sidesteps that: --orbit-static-distance
+   is the same per-pill position the running animation would eventually
+   pass through anyway, just applied without an animation timeline. */
+@media (prefers-reduced-motion: reduce) {
+  .node {
+    animation: none;
+    offset-distance: var(--orbit-static-distance, 0%);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: auto;
+    padding: 6rem var(--space-2) var(--space-4);
+  }
+
+  .inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  .content {
+    text-align: center;
+    order: 1;
+  }
+
+  .role {
+    justify-content: center;
+  }
+
+  .techBadges {
+    justify-content: center;
+  }
+
+  .description {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .actions {
+    justify-content: center;
+  }
+
+  .portrait {
+    order: 0;
+  }
+
+  .frame {
+    max-width: 220px;
+  }
+}
+
+/* Reserves room for the fixed side-nav dots — see --sidenav-gutter in
+   globals.css. Declared after the base rule so it wins for this side only. */
+@media (min-width: 769px) {
+  .hero {
+    padding-right: var(--sidenav-gutter);
+  }
+}
