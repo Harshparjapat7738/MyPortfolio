@@ -1,4 +1,4 @@
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, FileText } from "lucide-react";
 import { CompanyLogoRotator } from "@/components/ui/CompanyLogoRotator";
 import { RevealSection } from "@/components/ui/RevealSection";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -51,6 +51,17 @@ export function Experience() {
                       </li>
                     ))}
                   </ul>
+                  {entry.document ? (
+                    <a
+                      href={entry.document.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.documentLink}
+                    >
+                      <FileText size={15} aria-hidden="true" />
+                      {entry.document.label}
+                    </a>
+                  ) : null}
                 </div>
               </div>
             );

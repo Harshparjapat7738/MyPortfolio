@@ -219,6 +219,10 @@ export interface ExperienceEntry {
   highlights: string[];
   /** Company mark shown in the entry's logo badge (see CompanyLogoRotator). */
   logo: { src: string; alt: string };
+  /** Supporting document for this role (offer/experience/training letter),
+   *  if one was supplied — omit the field entirely for an entry that has
+   *  none rather than linking a placeholder. */
+  document?: { href: string; label: string };
 }
 
 export const experienceContent = {
@@ -230,6 +234,7 @@ export const experienceContent = {
       company: "Levithan Private Ltd",
       duration: "5 Months",
       logo: { src: "/images/levithan.png", alt: "Levithan Private Ltd" },
+      document: { href: "/resume/Levithan%20Experience%20Letter.pdf", label: "Experience Letter" },
       tech: [ "REST APIs","NodeJS", "ExpressJS", "ReactJS", "MongoDB", "JWT", "Spring Security", "API integration"],
       highlights: [
         "Developed and maintained backend services using Java, Spring Boot, Hibernate, and MySQL.",
@@ -244,6 +249,7 @@ export const experienceContent = {
       company: "CodeSquadz, Noida",
       duration: "6 Months",
       logo: { src: "/images/codesquadz.png", alt: "CodeSquadz" },
+      document: { href: "/resume/codesquadz%20traning%20letter.pdf", label: "Training Letter" },
       tech: ["Java","Spring Boot", "Hibernate ORM", "MySQL", "Microservices", "REST APIs","Spring Data JPA"],
       highlights: [
         "Built full-stack web applications using Spring Boot, React.js, and MongoDB.",
@@ -292,8 +298,19 @@ export const contactContent = {
   },
 };
 
+export interface SocialLink {
+  label: string;
+  href: string;
+  icon: string;
+}
+
 export const footerContent = {
   name: "HarshPrajapati",
   role: "Software Engineer & Java Developer",
   tagline: "Building scalable, secure backend systems with Java, Spring Boot, and Microservices.",
+  socialLinks: [
+    // lucide-react dropped brand-logo icons a while back — GitBranch is
+    // the same generic stand-in used for "GitHub" in the Skills section.
+    { label: "GitHub", href: "https://github.com/Harshparjapat7738", icon: "GitBranch" },
+  ] satisfies SocialLink[],
 };

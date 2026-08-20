@@ -1,9 +1,14 @@
 "use client";
 
+import { GitBranch, type LucideIcon } from "lucide-react";
 import { useInViewOnce } from "@/hooks/useInViewOnce";
 import { footerContent } from "@/lib/content";
 import { sections } from "@/lib/sections";
 import styles from "./Footer.module.css";
+
+const SOCIAL_ICONS: Record<string, LucideIcon> = {
+  GitBranch,
+};
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -25,13 +30,36 @@ export function Footer() {
             </p>
           </div>
 
-          <nav className={styles.nav} aria-label="Footer navigation">
-            {sections.map((section) => (
-              <a key={section.id} href={`#${section.id}`} className="link-underline">
-                {section.label}
-              </a>
-            ))}
-          </nav>
+          <div className={styles.secondary}>
+            {footerContent.socialLinks.length > 0 ? (
+              <div className={styles.social}>
+                {footerContent.socialLinks.map((link) => {
+                  const Icon = SOCIAL_ICONS[link.icon];
+                  return (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="icon-btn"
+                      aria-label={link.label}
+                      title={link.label}
+                    >
+                      {Icon ? <Icon size={20} /> : null}
+                    </a>
+                  );
+                })}
+              </div>
+            ) : null}
+
+            <nav className={styles.nav} aria-label="Footer navigation">
+              {sections.map((section) => (
+                <a key={section.id} href={`#${section.id}`} className="link-underline">
+                  {section.label}
+                </a>
+              ))}
+            </nav>
+          </div>
         </div>
       </div>
     </footer>
