@@ -133,6 +133,7 @@ export const skillsContent = {
         { name: "Postman", icon: "Send" },
         { name: "MySQL Workbench", icon: "Wrench" },
         { name: "MongoDB Compass", icon: "Compass" },
+        { name: "Docker", icon: "Container" },
       ],
     },
     {
@@ -169,6 +170,14 @@ export const projectsContent = {
   heading: "Featured Projects",
   subtitle: "Microservices and full-stack projects I've built, backend-first.",
   entries: [
+    {
+      title: "JD Optimize Resume",
+      type: "Microservices",
+      description:
+        "AI-powered platform that parses a job description and generates a tailored resume, cover letter and outreach email content. Built as independent Spring Boot microservices for JD parsing, content optimization and document generation, coordinated behind an API Gateway.",
+      tech: ["Java", "Spring Boot", "Microservices", "API Gateway", "REST APIs"],
+      icon: "FileText",
+    },
     {
       title: "Hotel Microservice Project",
       type: "Microservices",

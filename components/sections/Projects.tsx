@@ -1,4 +1,4 @@
-import { BrainCircuit, Contact, Hotel, Newspaper, ShieldCheck, type LucideIcon } from "lucide-react";
+import { BrainCircuit, Contact, FileText, Hotel, Newspaper, ShieldCheck, type LucideIcon } from "lucide-react";
 import { RevealSection } from "@/components/ui/RevealSection";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { projectsContent } from "@/lib/content";
@@ -10,6 +10,7 @@ const PROJECT_ICONS: Record<string, LucideIcon> = {
   BrainCircuit,
   ShieldCheck,
   Newspaper,
+  FileText,
 };
 
 export function Projects() {
