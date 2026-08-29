@@ -14,13 +14,7 @@ export function Experience() {
         <div className={styles.timeline}>
           <div className={styles.line} aria-hidden="true" />
 
-          {experienceContent.entries.map((entry, index) => {
-            // Exactly two entries today, so "the other one" is always the
-            // rotator's back face — this also just works if a third entry
-            // is added later (each one pairs with its neighbor).
-            const otherEntry =
-              experienceContent.entries[(index + 1) % experienceContent.entries.length];
-
+          {experienceContent.entries.map((entry) => {
             return (
               <div className={styles.item} key={`${entry.company}-${entry.role}`}>
                 <div className={styles.dot} aria-hidden="true" />
@@ -29,8 +23,8 @@ export function Experience() {
                     <CompanyLogoRotator
                       frontSrc={entry.logo.src}
                       frontAlt={entry.logo.alt}
-                      backSrc={otherEntry.logo.src}
-                      backAlt={otherEntry.logo.alt}
+                      backSrc={entry.logo.src}
+                      backAlt={entry.logo.alt}
                     />
                   </div>
                   <div className={styles.duration}>{entry.duration}</div>
