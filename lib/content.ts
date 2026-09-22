@@ -119,7 +119,7 @@ export const skillsContent = {
       label: "Core CS",
       skills: [
         { name: "Data Structures & Algorithms", icon: "Binary" },
-        { name: "OOP", icon: "Component" },
+        { name: "OOPs", icon: "Component" },
       ],
     },
     {
@@ -179,6 +179,22 @@ export const projectsContent = {
       icon: "FileText",
     },
     {
+      title: "BizzConnect",
+      type: "Full-Stack",
+      description:
+        "Business-selling marketplace where sellers register and list their property, assets, land and other business-related equipment for sale. Built on the MERN stack.",
+      tech: ["MongoDB", "Express.js", "React.js", "Node.js"],
+      icon: "Store",
+    },
+    {
+      title: "Data Mapping",
+      type: "Full-Stack",
+      description:
+        "AI-powered workflow visualizer: describe a project's complete workflow and the application generates a full swimlane flowchart from it using a Groq AI model. Built on the MERN stack.",
+      tech: ["MongoDB", "Express.js", "React.js", "Node.js", "Groq AI"],
+      icon: "Workflow",
+    },
+    {
       title: "Hotel Microservice Project",
       type: "Microservices",
       description:
@@ -214,22 +230,6 @@ export const projectsContent = {
         "Full-featured blogging platform with user roles, post management and comment system using Spring Boot and Hibernate.",
       tech: ["Spring Boot", "Hibernate"],
       icon: "Newspaper",
-    },
-    {
-      title: "Data Mapping",
-      type: "Full-Stack",
-      description:
-        "AI-powered workflow visualizer: describe a project's complete workflow and the application generates a full swimlane flowchart from it using a Groq AI model. Built on the MERN stack.",
-      tech: ["MongoDB", "Express.js", "React.js", "Node.js", "Groq AI"],
-      icon: "Workflow",
-    },
-    {
-      title: "BizzConnect",
-      type: "Full-Stack",
-      description:
-        "Business-selling marketplace where sellers register and list their property, assets, land and other business-related equipment for sale. Built on the MERN stack.",
-      tech: ["MongoDB", "Express.js", "React.js", "Node.js"],
-      icon: "Store",
     },
   ] satisfies ProjectEntry[],
 };
