@@ -141,6 +141,31 @@
   flex: 1;
 }
 
+.repoLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  align-self: flex-start;
+  margin-bottom: var(--space-3);
+  color: var(--accent);
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.repoLink:hover {
+  text-decoration: underline;
+}
+
+.aiTag {
+  align-items: center;
+  gap: 0.35rem;
+  background-color: var(--accent-soft);
+  color: var(--accent);
+  border-color: var(--accent);
+  font-weight: 600;
+}
+
 .tags {
   display: flex;
   flex-wrap: wrap;

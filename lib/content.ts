@@ -161,15 +161,28 @@ export interface ProjectEntry {
   description: string;
   tech: string[];
   icon: string;
+  /** Public repository URL — omit for projects without a public repo. */
+  github?: string;
+  /** Marks a project as built with Claude AI (shows a badge on the card). */
+  builtWithClaude?: boolean;
 }
 
-// No GitHub/live URLs, screenshots, or metrics exist for these projects on
-// the resume — cards are designed to stand on description + tech stack
-// alone rather than fabricating links. See the CTA below the grid instead.
+// Only projects with a public repo carry a `github` link; the rest have no
+// GitHub/live URLs, screenshots, or metrics, so cards stand on description +
+// tech stack alone rather than fabricating links. See the CTA below the grid.
 export const projectsContent = {
   heading: "Featured Projects",
   subtitle: "Microservices and full-stack projects I've built, backend-first.",
   entries: [
+    {
+      title: "Pivora",
+      type: "Web App",
+      description:
+        "PDF editor where users can perform multiple actions on a PDF, such as editing and deleting content, in one place.",
+      tech: ["PDF Editing"],
+      icon: "FilePen",
+      builtWithClaude: true,
+    },
     {
       title: "JD Optimize Resume",
       type: "Microservices",
